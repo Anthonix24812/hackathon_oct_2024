@@ -1,5 +1,6 @@
 from flask import Flask, request, send_from_directory
 from src.plotting.plot_service import plot
+from src.rag import rag_service
 
 app = Flask(__name__, static_folder='UI', template_folder='UI')
 
@@ -22,9 +23,7 @@ def ping():
 def query():
     global analysis_id
     query = request.json['query']
-    # TODO: call data extractor
-    data = {}
-    
-    analysis_id += 1
+    data = rag_service(query)
     plot(analysis_id, data, query)
+    analysis_id += 1
     return {'analysis': f'analyses/{analysis_id-1}.png'}, 200, {'Content-Type': 'application/json'}

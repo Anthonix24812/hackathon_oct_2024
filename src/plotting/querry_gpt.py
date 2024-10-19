@@ -21,13 +21,13 @@ def run_querry(user_querry, json_file):
     )   
     message_content = completion.choices[0].message.content
 
-    cleaned_message = message_content.strip("```python").strip("```")
+    cleaned_message = message_content.replace("```python", "").replace("```", "")
 
     return cleaned_message
 
 
 def querry_gpt(user_querry, data) -> str:
-    return run_querry(user_querry, json_file)
+    return run_querry(user_querry, data)
 
 
 def turn_json_into_str(json_file):
