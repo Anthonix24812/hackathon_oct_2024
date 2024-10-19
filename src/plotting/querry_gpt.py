@@ -5,8 +5,6 @@ load_dotenv()
 client = OpenAI()
 
 
-
-
 def run_querry(final_promt):
     global client
     completion = client.chat.completions.create(
@@ -22,10 +20,10 @@ def run_querry(final_promt):
     print(completion.choices[0].message)
 
 
-
-def querry_gpt(user_querry, data, id):
+def querry_gpt(user_querry, data) -> str:
     return ""
 
-run_querry("Imagine you've gotten a .json file including sustainablity data. Now create the code that creates a matplotlib grafic to visualize this data. Make sure to only"+
+if __name__ == '__main__':
+    run_querry("Imagine you've gotten a .json file including sustainablity data. Now create the code that creates a matplotlib grafic to visualize this data. Make sure to only"+
             "include the python code as a string and nothing else. Within the python code make sure to save the created plot in file called result.png")
 

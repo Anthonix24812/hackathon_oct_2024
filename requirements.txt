@@ -17,5 +17,5 @@ faiss-cpu
 langchain-openai
 python-dotenv
 flask==3.0.0
-flask-cors==3.0.0
 python-dotenv
+matplotlib
