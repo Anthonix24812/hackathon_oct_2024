@@ -4,11 +4,13 @@ from openai import OpenAI
 load_dotenv()
 client = OpenAI()
 
+MODEL = "gpt-3.5-turbo-0125"
 
 def run_querry(user_querry, json_file):
     global client
+    global MODEL
     completion = client.chat.completions.create(
-    model="gpt-3.5-turbo-0125",
+    model=MODEL,
     messages=[
         {"role": "system", "content": "You are given a JSON file containing sustainability metrics extracted from company reports. Your task is to create Python code (and only Python code) that uses the matplotlib library to generate suitable graphs, such as bar charts, pie charts, or other appropriate visualizations. The code should be able to handle the creation of one or multiple graphs within a single PNG file. \n Important requirements: \n The generated Python code should save the plot(s) in a file called **result.png**. The output must be returned strictly as a Python code string. Ensure the graphs accurately represent the data in the JSON file and that they are visually clear." + 
         "When analysing the JSON file, consider the following context, that the user wants to be considered. This will be the context question for creating the plots:" + user_querry},

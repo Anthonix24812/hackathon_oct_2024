@@ -2,29 +2,55 @@
 import matplotlib.pyplot as plt
 
 data = {
-    "recycled_tin": {
+    "recycled_metals": {
         "2021": {
-            "percentage": 30,
-            "unit": "%"
+            "average_recycled_content": {
+                "value": 30,
+                "unit": "%"
+            },
+            "recycled_tin": {
+                "value": 30,
+                "unit": "%"
+            },
+            "recycled_gold": {
+                "value": 1,
+                "unit": "%"
+            }
         },
         "2022": {
-            "percentage": 38,
-            "unit": "%"
+            "average_recycled_content": {
+                "value": 20,
+                "unit": "%"
+            },
+            "recycled_tin": {
+                "value": 38,
+                "unit": "%"
+            },
+            "recycled_gold": {
+                "value": 4,
+                "unit": "%"
+            }
         }
     }
 }
 
-years = list(data['recycled_tin'].keys())
-percentages = [data['recycled_tin'][year]['percentage'] for year in years]
+years = list(data["recycled_metals"].keys())
+recycled_tin_values = [data["recycled_metals"][year]["recycled_tin"]["value"] for year in years]
+recycled_gold_values = [data["recycled_metals"][year]["recycled_gold"]["value"] for year in years]
 
-plt.figure(figsize=(8, 5))
-plt.bar(years, percentages, color='skyblue')
+# Creating bar chart for recycled tin and recycled gold values
+plt.figure(figsize=(10, 6))
+bar_width = 0.35
+index = range(len(years))
+bar1 = plt.bar(index, recycled_tin_values, bar_width, label='Recycled Tin', color='b')
+bar2 = plt.bar([i + bar_width for i in index], recycled_gold_values, bar_width, label='Recycled Gold', color='g')
+
 plt.xlabel('Year')
 plt.ylabel('Percentage')
-plt.title('Reported Levels of Recycled Tin in Apple Products (2021-2022)')
-plt.ylim(0, 50)
-
-for i, percentage in enumerate(percentages):
-    plt.text(i, percentage + 1, f'{percentage}%', ha='center', color='black')
+plt.title('Reported Levels of Recycled Metals in Apple Products (2021-2022)')
+plt.xticks([i + bar_width/2 for i in index], years)
+plt.legend()
+plt.tight_layout()
 
 plt.savefig('result.png')
+  
